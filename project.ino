@@ -5,6 +5,7 @@
 #include <Adafruit_Sensor.h>  // Generic sensor library needed for the MPU6050
 #include <Wire.h>             // Wire library for I2C communication
 
+#include "W25Q64.h"
 #include "TestFunctions.h"
 
 // Pin definitions for the Adafruit 1.44" TFT with ST7735
@@ -26,6 +27,9 @@ Adafruit_MPU6050 mpu;
 // Flag to keep track of MPU6050 initialization status
 bool mpu_able = true;
 
+// W25Q64: software SPI
+W25Q64SPI W25Q64 = W25Q64SPI();
+
 void setup() {
   // Serial communication for debugging
   Serial.begin(9600);
@@ -41,9 +45,12 @@ void setup() {
     Serial.println("Failed to find MPU6050 chip");
   }
 
+  W25Q64.SPI_Init();
 }
 
 void loop() {
-  testDisplay();
-  testMPU();
+  // testDisplay();
+  // testMPU();
+  testW25Q64();
+  delay(2000);
 }

@@ -7,5 +7,6 @@
 // Function declarations
 void testDisplay();
 void testMPU();
+void testW25Q64();
 
 #endif
