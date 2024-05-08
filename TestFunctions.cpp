@@ -5,6 +5,7 @@
 #include <Adafruit_MPU6050.h>
 #include "W25Q64.h"
 #include "W25Q64_cp.h"
+#include "MPU6050.h"
 
 extern Adafruit_ST7735 tft;  // Use the 'tft' object created in your main sketch
 extern Adafruit_MPU6050 mpu; // Use the 'mpu' object created in your main sketch
@@ -43,6 +44,8 @@ void testMPU()
   Serial.print("Z: ");
   Serial.print(a.acceleration.z);
   Serial.println(" m/s^2");
+  Serial.print("Norm: ");
+  Serial.println(getAccelNorm());
 
   // Print gyroscope data
   Serial.println("=== Gyroscope ===");

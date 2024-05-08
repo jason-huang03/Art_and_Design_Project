@@ -57,6 +57,7 @@ void loop()
 {
   // testDisplay();
   // testMPU();
-  testW25Q64();
-  delay(2000);
+  // testW25Q64();
+  testMPU();
+  delay(1000);
 }
