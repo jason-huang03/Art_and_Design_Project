@@ -7,14 +7,15 @@
 
 #include "W25Q64.h"
 #include "TestFunctions.h"
+#include "W25Q64_cp.h"
 
 // Pin definitions for the Adafruit 1.44" TFT with ST7735
-#define TFT_CS     10  // Chip select line for TFT display
-#define TFT_RST    8   // Reset line for TFT (optional use, can connect to Arduino RESET pin)
-#define TFT_DC     9   // Data/command line for TFT
+#define TFT_CS 10 // Chip select line for TFT display
+#define TFT_RST 8 // Reset line for TFT (optional use, can connect to Arduino RESET pin)
+#define TFT_DC 9  // Data/command line for TFT
 
 // TFT screen
-// SCK: 13, SDI: 11, CS: 10, RS: 9, RST: 8 
+// SCK: 13, SDI: 11, CS: 10, RS: 9, RST: 8
 
 // Create an ST7735 object. Since we are using hardware SPI, MOSI and SCK are set automatically
 Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
@@ -29,26 +30,31 @@ bool mpu_able = true;
 
 // W25Q64: software SPI
 W25Q64SPI W25Q64 = W25Q64SPI();
+W25Q64SPI_cp W25Q64_cp = W25Q64SPI_cp();
 
-void setup() {
+void setup()
+{
   // Serial communication for debugging
   Serial.begin(9600);
 
   // Initialize the display
-  tft.initR(INITR_BLACKTAB);  
+  tft.initR(INITR_BLACKTAB);
   tft.fillScreen(ST7735_BLACK); // Clear the screen to black
 
   // Initialize MPU6050
-  if (!mpu.begin()) {
+  if (!mpu.begin())
+  {
     // If MPU6050 initialization fails, update flag
     mpu_able = false;
     Serial.println("Failed to find MPU6050 chip");
   }
 
-  W25Q64.SPI_Init();
+  // W25Q64.SPI_Init();
+  W25Q64_cp.W25Q64_Init();
 }
 
-void loop() {
+void loop()
+{
   // testDisplay();
   // testMPU();
   testW25Q64();
